@@ -1,0 +1,13 @@
+{
+    "domain": "nostradamus",
+    "name": "Nostradamus",
+    "version": "0.1.0",
+    "codeowners": [],
+    "config_flow": true,
+    "dependencies": [],
+    "documentation": "https://github.com/your-repo/nostradamus",
+    "iot_class": "local_polling",
+    "requirements": [
+        "requests>=2.31.0"
+    ]
+}

@@ -1,0 +1,63 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "Connect to Nostradamus Add-on",
+                "description": "Enter the URL of your Nostradamus add-on. If running as a local add-on, use the default URL.",
+                "data": {
+                    "addon_host": "Add-on URL"
+                }
+            },
+            "target": {
+                "title": "Select Target Entity",
+                "description": "Choose the sensor you want to predict. This should be a numeric sensor with historical data.",
+                "data": {
+                    "target_entity": "Target Entity",
+                    "name": "Forecast Name (optional)"
+                }
+            },
+            "supporting": {
+                "title": "Select Supporting Entities",
+                "description": "Optionally select other sensors that might influence your target. For example, outdoor temperature for indoor temperature prediction.",
+                "data": {
+                    "supporting_entities": "Supporting Entities"
+                }
+            },
+            "horizon": {
+                "title": "Configure Forecast Horizon",
+                "description": "How many steps into the future should we predict? The step size is automatically detected from your sensor's update frequency.",
+                "data": {
+                    "horizon": "Forecast Horizon (steps)"
+                }
+            }
+        },
+        "error": {
+            "cannot_connect": "Cannot connect to the Nostradamus add-on. Make sure it's installed and running.",
+            "invalid_horizon": "Horizon must be at least 1 step.",
+            "horizon_too_large": "Horizon cannot exceed 168 steps (1 week)."
+        },
+        "abort": {
+            "already_configured": "This entity is already configured for forecasting."
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "title": "Nostradamus Options",
+                "data": {
+                    "horizon": "Forecast Horizon (steps)"
+                }
+            }
+        }
+    },
+    "entity": {
+        "sensor": {
+            "forecast": {
+                "name": "Forecast"
+            },
+            "confidence": {
+                "name": "Confidence"
+            }
+        }
+    }
+}
