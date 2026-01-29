@@ -84,10 +84,30 @@ class ForecastEngine:
         }
         self.storage.save(forecast_id, config)
         
-        # Train and generate forecast
-        result = self._train_and_forecast(forecast_id, config, history)
+        # Start training in background
+        import threading
+        thread = threading.Thread(
+            target=self._train_and_forecast_background,
+            args=(forecast_id, config, history)
+        )
+        thread.start()
         
-        return result
+        return config
+
+    def _train_and_forecast_background(
+        self,
+        forecast_id: str,
+        config: Dict[str, Any],
+        history: Dict[str, pd.DataFrame]
+    ) -> None:
+        """Background wrapper for training."""
+        try:
+            self._train_and_forecast(forecast_id, config, history)
+        except Exception as e:
+            logger.exception(f"Background training failed for {forecast_id}")
+            config["status"] = "error"
+            config["error"] = str(e)
+            self.storage.save(forecast_id, config)
     
     def retrain(self, forecast_id: str) -> Dict[str, Any]:
         """
@@ -291,7 +311,7 @@ class ForecastEngine:
             feature_names.extend([f"{safe_name}_value", f"{safe_name}_lag_1"])
         
         # Target is the value 'horizon' steps in the future
-        df["y"] = df["target"].shift(-horizon)
+        df["y"] = df["target"].shift(-int(horizon))
         
         # Drop rows with NaN
         df = df.dropna()

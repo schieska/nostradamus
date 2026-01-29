@@ -57,7 +57,12 @@ class NostradamusCoordinator(DataUpdateCoordinator[Dict[str, Any]]):
                 await self._create_forecast()
             
             # Get latest forecast
-            return await self._get_forecast()
+            data = await self._get_forecast()
+            
+            if data.get("status") == "training":
+                _LOGGER.debug(f"Forecast {self.forecast_id} is still training")
+                
+            return data
             
         except aiohttp.ClientError as err:
             raise UpdateFailed(f"Error communicating with add-on: {err}") from err
