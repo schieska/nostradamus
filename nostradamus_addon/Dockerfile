@@ -4,14 +4,16 @@ FROM ${BUILD_FROM}
 # Install build dependencies for LightGBM
 RUN apk add --no-cache \
     python3 \
+    python3-dev \
     py3-pip \
     py3-numpy \
     py3-scipy \
     py3-pandas \
     libgomp \
     cmake \
-    make \
-    g++ \
+    build-base \
+    pkgconfig \
+    openblas-dev \
     git
 
 # Create app directory
