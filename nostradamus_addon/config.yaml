@@ -1,6 +1,6 @@
 name: "Nostradamus"
 description: "ML-powered sensor forecasting for Home Assistant. Predict any numeric sensor using historical data and user-selected supporting sensors."
-version: "0.1.1"
+version: "0.1.2"
 slug: "nostradamus"
 image: "ghcr.io/schieska/nostradamus-{arch}"
 init: false
