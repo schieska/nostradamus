@@ -1,6 +1,6 @@
 # Core ML
-lightgbm>=4.0.0,<5.0.0
-scikit-learn>=1.4.0,<2.0.0
+lightgbm==4.5.0
+scikit-learn==1.5.2
 
 # Data processing
 pandas>=2.0.0,<3.0.0
